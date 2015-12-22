@@ -5,10 +5,9 @@ version := "1.0"
 scalaVersion := "2.11.6"
 
 libraryDependencies ++= Seq(
-"org.apache.spark" %% "spark-core" % "1.3.0" % "provided",
-"org.apache.spark" %% "spark-sql" % "1.3.0" % "provided",
-"org.apache.spark" % "spark-streaming_2.10" % "1.3.0" % "provided",
-"org.apache.spark" % "spark-streaming-kafka_2.10" % "1.3.0",
+"org.apache.spark" %% "spark-core" % "1.5.1" % "provided",
+"org.apache.spark" % "spark-mllib_2.11" % "1.5.1",
+"org.apache.spark" % "spark-streaming_2.11" % "1.5.1" % "provided"
 )
 
 mergeStrategy in assembly := {

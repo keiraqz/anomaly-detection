@@ -19,46 +19,44 @@ import org.apache.spark.mllib.clustering._
 import java.io._
 import org.apache.spark.streaming._
 import scala.collection.mutable
-// import java.util.Date
-// import org.joda.time.DateTime
-// import org.joda.time.format.DateTimeFormat
+
 
 object AnomalyDetectionTest {
   def main(args: Array[String]) {
     val sparkConf = new SparkConf().setAppName("AnomalyDetectionTest")
     val sc = new SparkContext(sparkConf)
+    val ssc = new StreamingContext(sc, Seconds(3))
     val model = loadCentroidAndThreshold(sc).cache()
 
-    // load model info
-    val centroid = model.first()._1
-    val threshold = model.first()._2
+    // load model info and broadcast to all executors
+    val centroid = sc.broadcast(model.first()._1)
+    val threshold = sc.broadcast(model.first()._2)
 
     // load data
     val normalizedTestDataAndLabel = loadData(sc)
 
-    val ssc = new StreamingContext(sc, Seconds(3))
     // put data into a queue
     val lines = mutable.Queue[RDD[(Vector, String)]]()
     val messages = ssc.queueStream(lines)
     
     messages.foreachRDD { rdd => 
-
     // get the anomalies
       val anomalies = rdd.filter(
-          d => Vectors.sqdist(d._1, centroid) > threshold  // threshold is calculated during training
+          d => Vectors.sqdist(d._1, centroid.value) > threshold.value  // threshold is calculated during training
           )
       println(anomalies.count)
 
-      // rdd.foreach(println)
     }
 
-    
     ssc.start() // Start the computation
     lines += normalizedTestDataAndLabel // add data to the stream
     // ssc.stop()
     ssc.awaitTermination()
   }
 
+  /**
+   * Load the model information: centroid and threshold
+   */
   def loadCentroidAndThreshold(sc: SparkContext) : RDD[(Vector,Double)] = {
     val modelInfo = sc.textFile("/Users/Shanghai/Developer/Spark/AnomalyDetection/dataset/trainOutput.txt", 120)
     // val modelInfo = sc.textFile("../dataset/trainOutput.txt", 120)
@@ -128,11 +126,6 @@ object AnomalyDetectionTest {
 }
 
 
+// /Users/Shanghai/Documents/Tool/spark-1.5.2/bin/spark-submit --class AnomalyDetectionTest --jars target/scala-2.11/AnomalyDetectionTest-assembly-1.0.jar target/scala-2.11/anomalydetectiontest_2.11-1.0.jar
 
-object TimestampFormatter {
 
-  private val TimestampPattern = "yyyy-MM-dd'T'HH:mm:ssZ"
-
-  def format(date: Date): String =
-    DateTimeFormat.forPattern(TimestampPattern).print(new DateTime(date.getTime))
-}
