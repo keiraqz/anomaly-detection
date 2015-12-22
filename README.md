@@ -1,5 +1,5 @@
-# Anomaly Detection using Spark MLlib, Spark Streaming and Redis (under construction)
-An Anomaly Detection example using Spark MLlib, Spark Streaming and Redis.
+# Anomaly Detection using Spark MLlib and Spark Streaming
+An Anomaly Detection example using Spark MLlib and Spark Streaming.
 
 ## The Model
 
@@ -52,7 +52,3 @@ You can also play around with the code in Spark Shell. In terminal, start Spark 
 	./spark-shell
 
 Follow the steps of training in file: <a href= "https://github.com/keiraqz/anomaly-detection/blob/master/train-shell.scala" target="_blank">train-shell.scala</a>. Valication is in file: <a href= "https://github.com/keiraqz/anomaly-detection/blob/master/validation-shell.scala" target="_blank">validation-shell.scala</a>. Note that the validation code for Spark Shell does NOT use Spark Streaming. It's in batch processing form.
-
-
-## TODO
-- Use Redis for trained model & Anomaly flags
