@@ -28,7 +28,7 @@ The majority of the code mainly follows the tutorial from Sean Owen, Cloudera (<
 ### Spark Application
 The code is organized to run as a Spark Application.
 
-**Training**: Training is run as a batch job. To compile and run, go to folder <a href= "https://github.com/keiraqz/anomaly-detection/tree/master/spark-train">spark-train</a> and run:
+**Training**: Training is run as a batch job. To compile and run, go to folder <a href= "https://github.com/keiraqz/anomaly-detection/tree/master/spark-train" target="_blank">spark-train</a> and run:
 
 	sbt assambly
 	sbt package
