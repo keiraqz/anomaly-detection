@@ -6,7 +6,10 @@
  * Use "sbt assambly", "sbt package" to compile.
  * Use "spark-submit" to submit the job.
  * The job loads the "normal" centroid and threshold from the output file,
- * and streaming new inputs and tag them. 
+ * and streaming new inputs and compare to the threshold.
+ * <p>
+ * In an ideal situation, the program would read off data points from Kafka or other 
+ * data ingestion tools. For now, it's reading from a local file so the data is static.
  */
 
 import org.apache.spark.SparkConf
@@ -126,6 +129,6 @@ object AnomalyDetectionTest {
 }
 
 
-// /Users/Shanghai/Documents/Tool/spark-1.5.2/bin/spark-submit --class AnomalyDetectionTest --jars target/scala-2.11/AnomalyDetectionTest-assembly-1.0.jar target/scala-2.11/anomalydetectiontest_2.11-1.0.jar
+// spark-submit --class AnomalyDetectionTest --jars target/scala-2.11/AnomalyDetectionTest-assembly-1.0.jar target/scala-2.11/anomalydetectiontest_2.11-1.0.jar
 
 
