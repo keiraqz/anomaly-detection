@@ -7,7 +7,7 @@ An Anomaly Detection example using Spark, Spark Streaming and Redis.
 This model is using KMean approach and it is trained on **"normal"** dataset only. After the model is trained, the **centroid** of the "normal" dataset will be returend as well as a **threshold**. During the validation stage, any data points that are further than the **threshold** from the **centroid** are considered as **"anomalies"**.
 
 ### Dataset
-The dataset is downloaded from [KDD Cup 1999 Data for Anomaly Detection](http://kdd.ics.uci.edu/databases/kddcup99/kddcup99.html).
+The dataset is downloaded from <a href= "http://kdd.ics.uci.edu/databases/kddcup99/kddcup99.html" target="_blank">KDD Cup 1999 Data for Anomaly Detection</a>.
 
 **Training Set**: The training set is separated from the whole dataset with the data points that are labeled as **"normal"** only.
 
@@ -18,7 +18,7 @@ The dataset is downloaded from [KDD Cup 1999 Data for Anomaly Detection](http://
 The program is running as Spark local on a Mac pro.
 
 ### The Code
-The majority of the code mainly follows the tutorial from Sean Owen, Cloudera ([Video](https://www.youtube.com/watch?v=TC5cKYBZAeI), [Slides-1](http://www.slideshare.net/CIGTR/anomaly-detection-with-apache-spark), [Slides-2](http://www.slideshare.net/CIGTR/anomaly-detection-with-apache-spark-2)). Couple of modifcations have been made to fit personal interest:
+The majority of the code mainly follows the tutorial from Sean Owen, Cloudera ([Video](https://www.youtube.com/watch?v=TC5cKYBZAeI, target="_blank"), [Slides-1](http://www.slideshare.net/CIGTR/anomaly-detection-with-apache-spark), [Slides-2](http://www.slideshare.net/CIGTR/anomaly-detection-with-apache-spark-2)). Couple of modifcations have been made to fit personal interest:
 
 - Instead of training multiple clusters, the code only trains on "normal" data points
 - Only one cluster center is recorded and threshold is set to the last of the furthest 2000 data points
