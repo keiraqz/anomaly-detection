@@ -21,7 +21,6 @@ import java.io._
 object AnomalyDetection {
   def main(args: Array[String]) {
 
-    // val sparkConf = new SparkConf().setAppName("geo_data").set("spark.cassandra.connection.host", "172.31.11.232")
     val sparkConf = new SparkConf().setAppName("AnomalyDetection")
     val sc = new SparkContext(sparkConf)
     val normalizedData = loadData(sc)
@@ -31,6 +30,7 @@ object AnomalyDetection {
     val centroid = model.clusterCenters(0).toString // save centroid to file
   	bw.write(centroid)
   	bw.write(",")
+    
     // decide threshold for anormalies
     val distances = normalizedData.map(d => distToCentroid(d, model))
     val threshold = distances.top(2000).last // set the last of the furthest 2000 data points as the threshold

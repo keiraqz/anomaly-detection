@@ -48,7 +48,6 @@ object AnomalyDetectionTest {
           d => Vectors.sqdist(d._1, centroid.value) > threshold.value  // threshold is calculated during training
           )
       println(anomalies.count)
-
     }
 
     ssc.start() // Start the computation
@@ -66,8 +65,8 @@ object AnomalyDetectionTest {
    * Load the model information: centroid and threshold
    */
   def loadCentroidAndThreshold(sc: SparkContext) : RDD[(Vector,Double)] = {
-    val modelInfo = sc.textFile("/Users/Shanghai/Developer/Spark/AnomalyDetection/dataset/trainOutput.txt", 120)
-    // val modelInfo = sc.textFile("../dataset/trainOutput.txt", 120)
+    val modelInfo = sc.textFile("../dataset/trainOutput.txt", 120)
+
     // parse data file
     val centroidAndThreshold = modelInfo.map { line =>
       val buffer = ArrayBuffer[String]()
@@ -83,8 +82,7 @@ object AnomalyDetectionTest {
    * Load data from file, parse the data and normalize the data.
    */
   def loadData(sc: SparkContext) : RDD[(Vector, String)] = {
-    val rawData = sc.textFile("/Users/Shanghai/Developer/Spark/AnomalyDetection/dataset/ad.test.csv", 120)
-    // val rawData = sc.textFile("../dataset/ad.train.csv", 120)
+    val rawData = sc.textFile("../dataset/ad.train.csv", 120)
 
     // parse data file
     val dataAndLabel = rawData.map { line =>
@@ -134,6 +132,6 @@ object AnomalyDetectionTest {
 }
 
 
-// /Users/Shanghai/Documents/Tool/spark-1.5.2/bin/spark-submit --class AnomalyDetectionTest --jars target/scala-2.11/AnomalyDetectionTest-assembly-1.0.jar target/scala-2.11/anomalydetectiontest_2.11-1.0.jar
+// spark-submit --class AnomalyDetectionTest --jars target/scala-2.11/AnomalyDetectionTest-assembly-1.0.jar target/scala-2.11/anomalydetectiontest_2.11-1.0.jar
 
 
