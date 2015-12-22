@@ -4,7 +4,7 @@ An Anomaly Detection example using Spark MLlib for training and Spark Streaming 
 ## The Model
 
 ### Anomaly Detection Model
-This model is using KMeans(<a href="http://spark.apache.org/docs/latest/mllib-clustering.html#k-means" target="_blank">Spark MLlib K-means</a>) approach and it is trained on **"normal"** dataset only. After the model is trained, the **centroid** of the "normal" dataset will be returend as well as a **threshold**. During the validation stage, any data points that are further than the **threshold** from the **centroid** are considered as **"anomalies"**.
+This model is using KMeans(<a href="http://spark.apache.org/docs/latest/mllib-clustering.html#k-means" target="_blank">Spark MLlib K-means</a>) approach and it is trained on **"normal"** dataset only. After the model is trained, the **centroid** of the "normal" dataset will be returned as well as a **threshold**. During the validation stage, any data points that are further than the **threshold** from the **centroid** are considered as **"anomalies"**.
 
 ### Dataset
 The dataset is downloaded from <a href= "http://kdd.ics.uci.edu/databases/kddcup99/kddcup99.html" target="_blank">KDD Cup 1999 Data for Anomaly Detection</a>.
