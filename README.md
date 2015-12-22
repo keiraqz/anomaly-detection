@@ -46,7 +46,7 @@ You can also play around with the code in Spark Shell. In terminal, start Spark 
 	
 	./spark-shell
 
-Follow the steps of training in file: [train-shell.scala](https://github.com/keiraqz/anomaly-detection/blob/master/train-shell.scala). Valication is in file: [validation-shell.scala](https://github.com/keiraqz/anomaly-detection/blob/master/validation-shell.scala). 
+Follow the steps of training in file: <a href= "https://github.com/keiraqz/anomaly-detection/blob/master/train-shell.scala" target="_blank">train-shell.scala</a>. Valication is in file: <a href= "https://github.com/keiraqz/anomaly-detection/blob/master/validation-shell.scala" target="_blank">validation-shell.scala</a>. 
 
 
 ## TODO
