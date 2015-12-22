@@ -15,7 +15,7 @@ The dataset is downloaded from <a href= "http://kdd.ics.uci.edu/databases/kddcup
 
 
 ## Spark
-The program is running as Spark local on a Mac pro.
+This application is for learning and testing purpose, thus the program is running as Spark local on a Mac pro. However, the code should be similar if deployed onto a cluster. 
 
 ### The Code
 The majority of the code mainly follows the tutorial from Sean Owen, Cloudera (<a href= "https://www.youtube.com/watch?v=TC5cKYBZAeI" target="_blank">Video</a>, <a href= "http://www.slideshare.net/CIGTR/anomaly-detection-with-apache-spark" target="_blank">Slides-1</a>, <a href= "http://www.slideshare.net/cloudera/anomaly-detection-with-apache-spark-2" target="_blank">Slides-2</a>). Couple of modifcations have been made to fit personal interest:
@@ -26,7 +26,7 @@ The majority of the code mainly follows the tutorial from Sean Owen, Cloudera (<
 
 	
 ### Spark Application
-The code is organized to run as a Spark Application.
+The code is organized to run as a Spark Application. The application does "offline training" (Spark) and "online learning" (Spark Streaming).
 
 **Training**: Training is run as a batch job. To compile and run, go to folder <a href= "https://github.com/keiraqz/anomaly-detection/tree/master/spark-train" target="_blank">spark-train</a> and run:
 
@@ -36,7 +36,7 @@ The code is organized to run as a Spark Application.
 				target/scala-2.11/anomalydetection_2.11-1.0.jar
 
 	
-**Validation**: Validation is run as a streaming job. To compile and run, go to folder <a href= "https://github.com/keiraqz/anomaly-detection/tree/master/streaming-validation" target="_blank">streaming-validation</a> and run:
+**Validation**: Validation is run as a streaming job. Currently the application reads the input data from a local file. In an ideal situation, the program will read the data from some ingestion tools such as Kafka. Also, the trained model (centroid and threshold) is also saved in a local file. In production, the information should be saved into a database. The output of the testing should also be saved into a database. To compile and run, go to folder <a href= "https://github.com/keiraqz/anomaly-detection/tree/master/streaming-validation" target="_blank">streaming-validation</a> and run:
 
 	sbt assambly
 	sbt package
