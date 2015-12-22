@@ -2,9 +2,9 @@
  * @author Keira Zhou
  * @date 12/21/15
  *
- * Same training code but in OOP.
+ * Similar training code as in Spark Shell, but in OOP and with modification.
  * Use "sbt assambly", "sbt package" to compile.
- * Use "spark-submit" to run the job.
+ * Use "spark-submit" to submit the job.
  * The job save the "normal" centroid and threshold into an output file. 
  * (may try use Redis later)
  */
@@ -30,11 +30,11 @@ object AnomalyDetection {
     val bw = new BufferedWriter(new FileWriter(file))
     val centroid = model.clusterCenters(0).toString // save centroid to file
   	bw.write(centroid)
-  	bw.newLine()
+  	bw.write(",")
     // decide threshold for anormalies
     val distances = normalizedData.map(d => distToCentroid(d, model))
     val threshold = distances.top(2000).last // set the last of the furthest 2000 data points as the threshold
-    bw.write(threshold.toString)
+    bw.write(threshold.toString) // last item is the threshold
     bw.close()
   }
 
