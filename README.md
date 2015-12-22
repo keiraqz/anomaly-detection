@@ -36,9 +36,14 @@ The code is organized to run as a Spark Application.
 				target/scala-2.11/anomalydetection_2.11-1.0.jar
 
 	
-**Validation**: Validation is run as a streaming job. To compile and run, go to folder <a href= "" target="_blank">streaming-validation</a> and run:
+**Validation**: Validation is run as a streaming job. To compile and run, go to folder <a href= "https://github.com/keiraqz/anomaly-detection/tree/master/streaming-validation" target="_blank">streaming-validation</a> and run:
 
-TODO
+	sbt assambly
+	sbt package
+	spark-submit --class AnomalyDetectionTest \
+		 	--jars target/scala-2.11/AnomalyDetectionTest-assembly-1.0.jar \
+		 		target/scala-2.11/anomalydetectiontest_2.11-1.0.jar
+
 
 
 ### Spark Shell
@@ -46,9 +51,8 @@ You can also play around with the code in Spark Shell. In terminal, start Spark 
 	
 	./spark-shell
 
-Follow the steps of training in file: <a href= "https://github.com/keiraqz/anomaly-detection/blob/master/train-shell.scala" target="_blank">train-shell.scala</a>. Valication is in file: <a href= "https://github.com/keiraqz/anomaly-detection/blob/master/validation-shell.scala" target="_blank">validation-shell.scala</a>. 
+Follow the steps of training in file: <a href= "https://github.com/keiraqz/anomaly-detection/blob/master/train-shell.scala" target="_blank">train-shell.scala</a>. Valication is in file: <a href= "https://github.com/keiraqz/anomaly-detection/blob/master/validation-shell.scala" target="_blank">validation-shell.scala</a>. Note that the validation code for Spark Shell does NOT use Spark Streaming. It's in batch processing form.
 
 
 ## TODO
-- Spark Streaming for Validation
 - Use Redis for trained model & Anomaly flags
