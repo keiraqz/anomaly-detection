@@ -52,8 +52,13 @@ object AnomalyDetectionTest {
     }
 
     ssc.start() // Start the computation
-    lines += normalizedTestDataAndLabel // add data to the stream
-    // ssc.stop()
+
+    // loop the data to simulate streaming
+    while (true) {
+      lines += normalizedTestDataAndLabel // add data to the stream
+      Thread sleep 5000
+    }
+    
     ssc.awaitTermination()
   }
 
@@ -78,7 +83,7 @@ object AnomalyDetectionTest {
    * Load data from file, parse the data and normalize the data.
    */
   def loadData(sc: SparkContext) : RDD[(Vector, String)] = {
-    val rawData = sc.textFile("/Users/Shanghai/Developer/Spark/AnomalyDetection/dataset/ad.train.csv", 120)
+    val rawData = sc.textFile("/Users/Shanghai/Developer/Spark/AnomalyDetection/dataset/ad.test.csv", 120)
     // val rawData = sc.textFile("../dataset/ad.train.csv", 120)
 
     // parse data file
@@ -129,6 +134,6 @@ object AnomalyDetectionTest {
 }
 
 
-// spark-submit --class AnomalyDetectionTest --jars target/scala-2.11/AnomalyDetectionTest-assembly-1.0.jar target/scala-2.11/anomalydetectiontest_2.11-1.0.jar
+// /Users/Shanghai/Documents/Tool/spark-1.5.2/bin/spark-submit --class AnomalyDetectionTest --jars target/scala-2.11/AnomalyDetectionTest-assembly-1.0.jar target/scala-2.11/anomalydetectiontest_2.11-1.0.jar
 
 
