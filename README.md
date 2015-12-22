@@ -1,5 +1,5 @@
 # Anomaly Detection using Spark MLlib and Spark Streaming
-An Anomaly Detection example using Spark MLlib for training and Spark Streaming for testing.
+An Anomaly Detection example using Spark MLlib for training and Spark Streaming for testing. Slides are available <a href="http://www.slideshare.net/KeiraZhou2/anomaly-detection-using-spark-mllib-and-spark-streaming" target="_blank">here</a> 
 
 ## The Model
 
