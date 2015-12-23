@@ -36,7 +36,7 @@ The code is organized to run as a Spark Application. The application does "offli
 				target/scala-2.11/anomalydetection_2.11-1.0.jar
 
 	
-**Validation**: Validation is run as a streaming job. Currently the application reads the input data from a local file. In an ideal situation, the program will read the data from some ingestion tools such as Kafka. Also, the trained model (centroid and threshold) is also saved in a local file. In production, the information should be saved into a database. The output of the testing should also be saved into a database. To compile and run, go to folder <a href= "https://github.com/keiraqz/anomaly-detection/tree/master/streaming-validation" target="_blank">streaming-validation</a> and run:
+**Validation**: Validation is run as a streaming job. Currently the application reads the input data from a local file. In an ideal situation, the program will read the data from some ingestion tools such as Kafka (To connect Spark Streaming with Kafka, <a href= "https://github.com/keiraqz/artmosphere/blob/master/spark_streaming/src/main/scala/art_data.scala" target="_blank">my other project</a> can be used as an example). Also, the trained model (centroid and threshold) is also saved in a local file. In production, the information should be saved into a database. The output of the testing should also be saved into a database. To compile and run, go to folder <a href= "https://github.com/keiraqz/anomaly-detection/tree/master/streaming-validation" target="_blank">streaming-validation</a> and run:
 
 	sbt assambly
 	sbt package
