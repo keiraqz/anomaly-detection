@@ -62,3 +62,9 @@ Alternatively, you can also use <a href= "http://zeppelin-project.org/" target="
 	export SPARK_HOME=...
 
 For more detail, please visit <a href= "https://github.com/apache/incubator-zeppelin" target="_blank">here</a>.
+
+After installing Zeppelin, you can access the notebook in the browser: 
+
+	localhost:8080
+	
+Download my notebook <a href= "https://github.com/keiraqz/anomaly-detection/blob/master/Anomaly%20Detection.json" target="_blank">here</a> and use **import note** option to import the notebook.
