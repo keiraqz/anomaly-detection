@@ -51,4 +51,14 @@ You can also play around with the code in Spark Shell. In terminal, start Spark 
 	
 	./spark-shell
 
-Follow the steps of training in file: <a href= "https://github.com/keiraqz/anomaly-detection/blob/master/train-shell.scala" target="_blank">train-shell.scala</a>. Valication is in file: <a href= "https://github.com/keiraqz/anomaly-detection/blob/master/validation-shell.scala" target="_blank">validation-shell.scala</a>. Note that the validation code for Spark Shell does NOT use Spark Streaming. It's in batch processing form.
+Follow the steps in file: <a href= "https://github.com/keiraqz/anomaly-detection/blob/master/AnomalyDetection-shell.scala" target="_blank">train-shell.scala</a>. Note that the validation code for Spark Shell does NOT use Spark Streaming. It's in batch processing form.
+
+
+### Apache Zeppelin
+
+Alternatively, you can also use <a href= "http://zeppelin-project.org/" target="_blank">Apache Zeppelin</a> for testing purpose. To install, follow the steps <a href= "http://zeppelin-project.org/docs/install/install.html" target="_blank">here</a>. To configure with Spark, please configure in **conf/zeppelin-env.sh** file:
+	
+	# ./conf/zeppelin-env.sh
+	export SPARK_HOME=...
+
+For more detail, please visit <a href= "https://github.com/apache/incubator-zeppelin" target="_blank">here</a>.
