@@ -18,6 +18,9 @@
  */ 
 
 
+//************************************
+//         Training
+//************************************
 
 // train on the "normal" data points
 val rawData = sc.textFile("dataset/ad.train.csv", 120)
@@ -98,7 +101,6 @@ clusterLabelCount.toList.sorted.foreach { case
 }
 
 
-
 // calculate distance between data point to centroid
 def distToCentroid(datum: Vector, model: KMeansModel) = {
 	val centroid = model.clusterCenters(model.predict(datum)) // if more than 1 center
@@ -109,4 +111,51 @@ def distToCentroid(datum: Vector, model: KMeansModel) = {
 val distances = normalizedData.map(d => distToCentroid(d, model))
 val threshold = distances.top(2000).last
 
-// TODO: find the distribution of distance
+
+
+//************************************
+//         Testing
+//************************************
+
+// load data
+val rawTestdata = sc.textFile("dataset/ad.all.csv", 120)
+rawTestdata.count
+
+
+// parse input
+val testdataAndLabel = rawTestdata.map { line =>
+	val buffer = ArrayBuffer[String]()
+	buffer.appendAll(line.split(","))
+	buffer.remove(1, 3) // remove categorial attributes
+	val label = buffer.remove(buffer.length-1)
+	val vector = Vectors.dense(buffer.map(_.toDouble).toArray) 
+	(vector, label)
+}
+
+
+// validation data
+val testdata = testdataAndLabel.map(_._1).cache()
+
+// normalize data
+val normalizedTestData = testdata.map(normalize(_))
+val normalizedTestDataAndLabel = normalizedTestData.zip(testdataAndLabel.values) // put label back
+
+
+// define distance measure
+def distToCentroid(datum: Vector, model: KMeansModel) = {
+	val centroid = model.clusterCenters(0)
+	Vectors.sqdist(datum, centroid)
+}
+
+
+// calculate distance of validation data points
+val testDistances = normalizedTestData.map(d => distToCentroid(d, model))
+
+
+// get the anomalies
+val anomalies = normalizedTestDataAndLabel.filter(
+	d => distToCentroid(d._1, model) > threshold  // threshold is calculated during training
+	)
+
+anomalies.count()
+anomalies.filter(x => x._2 != "normal.").count // count true "anomalies"
