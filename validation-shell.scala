@@ -57,7 +57,7 @@ val normalizedTestDataAndLabel = normalizedTestData.zip(testdataAndLabel.values)
 // define distance measure
 def distToCentroid(datum: Vector, model: KMeansModel) = {
 	val centroid = model.clusterCenters(model.predict(datum))
-	distance(centroid, datum)
+	Vectors.sqdist(datum, centroid)
 }
 
 
